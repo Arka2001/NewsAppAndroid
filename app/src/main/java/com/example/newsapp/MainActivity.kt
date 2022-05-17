@@ -1,6 +1,7 @@
 package com.example.newsapp
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
     }
 
     private fun fetchData() {
-        val url = "https://newsapi.org/v2/everything?q=tesla&from=2022-04-17&sortBy=publishedAt&apiKey=b311f0ec4fe84f3593404841f36731e6"
+        val url = "https://newsapi.org/v2/top-headlines?country=in&category=technology&apiKey=b311f0ec4fe84f3593404841f36731e6"
 
         val jsonObjectRequest = JsonObjectRequest(
             url,
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
             },
             {
                 Toast.makeText(this, "Unexpected Error Occurred", Toast.LENGTH_SHORT).show()
+                Log.d("Error Message", it.toString())
             }
         )
 
@@ -55,6 +57,6 @@ class MainActivity : AppCompatActivity(), NewsItemClicked {
     }
 
     override fun onItemClicked(item: News) {
-        Toast.makeText(this, "Clicked Item is $item", Toast.LENGTH_SHORT).show()
+
     }
 }
